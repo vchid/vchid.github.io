@@ -1,1 +1,1 @@
-www.wwuww.club
+wwuww.club
