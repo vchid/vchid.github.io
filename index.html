@@ -1,15 +1,228 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
-</head>
-
-<body>
-	<h1>这是H1</h1>测试》
-</body>
-
+<!DOCTYPE html>
 <html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="https://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+		<script src="https://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="https://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+	</head>
+
+	<body>
+		<div data-role="page" id="pageone">
+			<div data-role="header">
+				<h1>资讯模块文章管理</h1></div>
+			<div data-role="main" class="ui-content">
+				<form method="get" action="">
+					<div class="ui-field-contain">
+						<label for="status">文章类别：</label>
+						<select id="status" name="status">
+							<option v-for="item in data" :value="item.id">{{item.name}}</option>
+						</select>
+					</div>
+					<script type="text/javascript">
+						<!--
+						var dataClassifyList = {
+							"code": "000000",
+							"data": [{
+									"id": "5ae9b5d3fccb441bce6a3897",
+									"name": "头条",
+									"orgId": 207545,
+									"sort": 20990,
+									"articleNumber": 810,
+									"createTime": 1525265875439,
+									"updateTime": 1533701588399
+								},
+								{
+									"id": "5b6a6e8ffccb445c882ae160",
+									"name": "生活",
+									"orgId": 207545,
+									"sort": 20991,
+									"articleNumber": 112,
+									"createTime": 1533701775867,
+									"updateTime": 1534471414542
+								},
+								{
+									"id": "5ae9b8d2fccb441bce6a398f",
+									"name": "搞笑",
+									"orgId": 207545,
+									"sort": 20992,
+									"articleNumber": 444,
+									"createTime": 1525266642847,
+									"updateTime": 1534471418038
+								},
+								{
+									"id": "5ae9b9f1fccb441bce6a3abc",
+									"name": "政务",
+									"orgId": 207545,
+									"sort": 34087,
+									"articleNumber": 739,
+									"createTime": 1525266929450,
+									"updateTime": 1534471418039
+								},
+								{
+									"id": "5b6a6e38fccb445c882ae15d",
+									"name": "松岗直播",
+									"orgId": 207545,
+									"sort": 34089,
+									"articleNumber": 12,
+									"createTime": 1533701688693,
+									"updateTime": 1533701816022
+								}
+							],
+							"currentTimes": 1535423231952,
+							"msg": "操作成功"
+						};
+						//						var app4 = new Vue({
+						//							el: '#status',
+						//							data: dataClassifyList
+						//						});
+						$(document).ready(function() {
+							//$("#b01").click(function(){
+//							var jsonList = $.ajax({
+//								crossDomain: true,
+//								xhrFields: {
+//									withCredentials: true
+//								},
+//								headers: {
+//									//        Accept: "application/json; charset=utf-8",
+//									'Cookie': "Authorization=pvZkrf0828JLD3C6QM"
+//								},
+//								type: "post",
+//								url: "http://a.197.com/web-smp/news/classify/list",
+//								beforeSend: function(xhr) {
+//									//  	xhr.setRequestHeader("Client_type", "DESKTOP_WEB");
+//								},
+//								async: false
+//							});
+//							console.log('jsonList', jsonList);
+//							var app4 = new Vue({
+//								el: '#status',
+//								data: dataClassifyList //jsonList.responseJSON
+//							});
+							//$("#myDiv").html(htmlobj.responseText);
+							//});
+						});
+
+							var jsonList = $.ajax({
+								crossDomain: true,
+								xhrFields: {
+									withCredentials: true
+								},
+								headers: {
+									//        Accept: "application/json; charset=utf-8",
+//									'Cookie': "Authorization=pvZkrf0828JLD3C6QM"
+								},
+								type: "post",
+								url: "http://a.197.com/web-smp/news/classify/list",
+								data:'{pageIndex: 1, newsClassifyId: "5ae9b5d3fccb441bce6a3897", pageSize: 20}',
+//								contentType: 'application/json',
+								beforeSend: function(xhr) {
+									xhr.setRequestHeader("Content-Type", "application/json");
+								},
+								async: false
+							});
+							console.log('jsonList', jsonList);
+							var app4 = new Vue({
+								el: '#status',
+								data: jsonList.responseJSON
+							});
+						//-->
+					</script>
+				</form>
+				<table data-role="table" class="ui-responsive" id="tblDoclist">
+					<thead>
+						<tr>
+							<th data-priority="6">时间</th>
+							<th>内容来源</th>
+							<th data-priority="1">标题</th>
+							<th data-priority="2">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--<tr style="background-color: #FFF;">
+							<td>2018-08-23</td>
+							<td>深圳微电影</td>
+							<td>全城接力！万千人被感动！“无人冰柜”走进环卫工，炎炎夏日送清凉</td>
+							<td>
+								<input type="checkbox" data-role="flipswitch" name="switch" id="switch" /></td>
+						</tr>
+						<tr>
+							<td>2018-08-27</td>
+							<td>幸福松岗</td>
+							<td>【纪律课堂】@所有党员，《中国共产党纪律处分条例》修订前后最全对照表，收藏！</td>
+							<td>置顶</td>
+						</tr>-->
+						<tr style="background-color: #FFF;" v-for="item in data.data">
+							<td>2018-08-23</td>
+							<td>{{item.originName}}</td>
+							<td>{{item.title}}</td>
+							<td>
+								<input type="checkbox" data-role="flipswitch" name="switch" id="switch" /></td>
+						</tr>
+					</tbody>
+				</table>
+					<script type="text/javascript">
+						<!--
+
+function testByRawObject(){
+	var method = "post";
+	var url = "http://a.197.com/web-smp/news/article/list";
+	var async = false;
+	//获取ajax对象
+var xmlHttp = new XMLHttpRequest();
+	xmlHttp.open(method, url, async);
+	xmlHttp.withCredentials = true;
+	//设置回调函数,接收服务器端的信息以进行处理
+	//xmlHttp.onreadystatechange = getServerInfo;
+	//想服务器端发送内容,为什么不起作用呢?
+//	xmlHttp.setRequestHeader("Content-Type", "application/json");
+	xmlHttp.send(null);	
+}
+function testByjQuery(){
+							var jsonArticleList = $.ajax({
+								crossDomain: true,
+								xhrFields: {
+									withCredentials: true
+								},
+//								headers: {
+//									//        Accept: "application/json; charset=utf-8",
+//									'Cookie': "Authorization=pvZkrf0828JLD3C6QM",
+//									'Origin': "http://a.197.com"
+//								},
+								type: "post",
+								url: "http://a.197.com/web-smp/news/article/list",
+								//url: "/web-smp/news/article/list",
+								//data:{pageIndex: 1, newsClassifyId: "5ae9b5d3fccb441bce6a3897", pageSize: 20},
+								data: '{"pageIndex": 1, "newsClassifyId": "5ae9b5d3fccb441bce6a3897", "pageSize": 20}',
+								dataType: 'json',
+								contentType: 'application/json',
+								beforeSend: function(xhr) {
+								  	//xhr.setRequestHeader("Content-Type", "application/json");
+								},
+								async: false
+							});
+							console.log('jsonArticleList', jsonArticleList);	
+							
+							var appArticleList = new Vue({
+								el: '#tblDoclist',
+								data: jsonArticleList.responseJSON
+							});
+
+}
+
+testByjQuery();
+//							var app4 = new Vue({
+//								el: '#status',
+//								data: jsonList.responseJSON
+//							});
+						//-->
+					</script>				
+			</div>
+		</div>
+	</body>
+
+</html>
